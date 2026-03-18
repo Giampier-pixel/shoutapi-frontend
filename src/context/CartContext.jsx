@@ -57,6 +57,10 @@ export const CartProvider = ({ children }) => {
   }, [isAuthenticated]);
 
   const addToCart = async (productId, quantity = 1) => {
+    if (!isAuthenticated) {
+      alert('Debes iniciar sesión para agregar productos al carrito');
+      return;
+    }
     await cart.addToCart(productId, quantity);
     await fetchCart();
   };
